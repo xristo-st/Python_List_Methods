@@ -15,7 +15,7 @@ COUNT   = "9"
 SORT    = "10"
 REVERSE = "11"
 COPY    = "12"
-EXIT   = "e"
+EXIT    = "e"
 menu_items = { CREATE: " create list",
                APPEND: " append()",
                EXTEND: " extend()",
@@ -36,7 +36,7 @@ RANDOM_FLOAT = '2'
 RANDOM_STRING = '3'
 RANDOM_BOOL = '4'
 RANDOM_MIXED = '5'
-INPUT_LIST = '10'
+INPUT_LIST = '6'
 create_menu = { RANDOM_INT: "random integers",
                 RANDOM_FLOAT: "random float",
                 RANDOM_STRING: "random string",
