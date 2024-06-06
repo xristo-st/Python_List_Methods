@@ -3,33 +3,33 @@ from blessed import Terminal
 
 term = Terminal()
 
-CREATE  = "1"
-APPEND  = "2"
-EXTEND  = "3"
-INSERT  = "4"
-REMOVE  = "5"
-POP     = "6"
-CLEAR   = "7"
-INDEX   = "8"
-COUNT   = "9"
-SORT    = "10"
+CREATE = "1"
+APPEND = "2"
+EXTEND = "3"
+INSERT = "4"
+REMOVE = "5"
+POP = "6"
+CLEAR = "7"
+INDEX = "8"
+COUNT = "9"
+SORT = "10"
 REVERSE = "11"
-COPY    = "12"
-EXIT    = "e"
-menu_items = { CREATE: " create list",
-               APPEND: " append()",
-               EXTEND: " extend()",
-               INSERT: " insert()",
-               REMOVE: " remove()",
-               POP: " pop()",
-               CLEAR: " clear()",
-               INDEX: " index()",
-               COUNT: " count()",
-               SORT: "sort()",
-               REVERSE: "reverse()",
-               COPY: "copy()",
-               EXIT: " exit"
-             }
+COPY = "12"
+EXIT = "e"
+menu_items = {CREATE: " create list",
+              APPEND: " append()",
+              EXTEND: " extend()",
+              INSERT: " insert()",
+              REMOVE: " remove()",
+              POP: " pop()",
+              CLEAR: " clear()",
+              INDEX: " index()",
+              COUNT: " count()",
+              SORT: "sort()",
+              REVERSE: "reverse()",
+              COPY: "copy()",
+              EXIT: " exit"
+              }
 
 RANDOM_INT = '1'
 RANDOM_FLOAT = '2'
@@ -37,12 +37,12 @@ RANDOM_STRING = '3'
 RANDOM_BOOL = '4'
 RANDOM_MIXED = '5'
 INPUT_LIST = '6'
-create_menu = { RANDOM_INT: "random integers",
-                RANDOM_FLOAT: "random float",
-                RANDOM_STRING: "random string",
-                RANDOM_BOOL: "random boolean",
-                RANDOM_MIXED: "random mixed",
-                INPUT_LIST: "input list"
+create_menu = {RANDOM_INT: "random integers",
+               RANDOM_FLOAT: "random float",
+               RANDOM_STRING: "random string",
+               RANDOM_BOOL: "random boolean",
+               RANDOM_MIXED: "random mixed",
+               INPUT_LIST: "input list"
                }
 
 
@@ -57,7 +57,7 @@ def list_separation(text: str) -> list:
 def press_key_to_continue():
     print("\nPress a key to continue...")
     with term.cbreak():
-        key = term.inkey()
+        term.inkey()
         print(term.normal)
 
 
@@ -70,7 +70,7 @@ def guess_the_type(item: str):
         return False
     if len(item) > 1:
         if (item[0] == '"' and item[-1] == '"') or \
-            (item[0] == "'" and item[-1] == "'"):
+           (item[0] == "'" and item[-1] == "'"):
             return item[1:-1]
     try:
         item = int(item)
@@ -86,7 +86,7 @@ def guess_the_type(item: str):
 
 
 def random_str() -> str:
-    length = random.randint(1,5)
+    length = random.randint(1, 5)
     result = ""
     for i in range(length):
         result += chr(random.randint(65, 122))
@@ -121,7 +121,7 @@ def random_mixed_list(length: int) -> list:
         elif random_type == RANDOM_STRING:
             item = random_str()
         elif random_type == RANDOM_BOOL:
-            item =  bool(random.randint(0,1))
+            item = bool(random.randint(0, 1))
         elif random_type == 5:
             item = None
         result.append(item)
@@ -129,7 +129,6 @@ def random_mixed_list(length: int) -> list:
 
 
 def create_list() -> list:
-    # print(term.home + term.move_xy(0, 2) + term.clear_eos, end="")
     print(term.underline_bright_red + "\nCREATE LIST\n" + term.normal)
     result = []
     for item in create_menu:
@@ -137,6 +136,7 @@ def create_list() -> list:
     command = input("Choose: ")
     if command not in create_menu:
         print("Incorrect command")
+        press_key_to_continue()
     elif command == INPUT_LIST:
         print("Enter a list (separated by commas): ")
         result = list_separation(input())
@@ -150,7 +150,7 @@ def create_list() -> list:
             result = random_str_list(length)
         elif command == RANDOM_BOOL:
             result = random_bool_list(length)
-        else:
+        elif command == RANDOM_MIXED:
             result = random_mixed_list(length)
     return result
 
@@ -305,12 +305,12 @@ def copy_method(lst: list):
     print("It returns a copy of the list\n")
     print(f"Your list: {lst}")
     copy_of_lst = lst.copy()
-    print(f"Copy of your list:  {lst}")
+    print(f"Copy of your list:  {copy_of_lst}")
     press_key_to_continue()
 
+
 def main():
-    print(term.home + term.clear + "Pyton list methods: exercise", end="")
-    print()
+    print(term.home + term.clear + "Pyton list methods: exercise\n", end="")
     lst = []
     while True:
         print(term.home + term.move_xy(0, 2) + term.clear_eos, end="")
